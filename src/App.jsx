@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function App() {
   const data={
@@ -6,11 +6,16 @@ function App() {
     "karnataka":"bengaluru",
     "TN":"chenai"
   }
-const [selectedState, setSelectedState]=useState("")
+const [ selectedState, setSelectedState]=useState("")
+const [capital,setCapital]=useState("")
 const changeState=(e)=>{
 console.log(e.target.value)
 setSelectedState(e.target.value);
 }
+
+useEffect(()=>{
+  setCapital(data[selectedState])
+},[selectedState])
   return (
     <>
     <div>
@@ -20,6 +25,7 @@ setSelectedState(e.target.value);
         <option value="TN">TN</option>
       </select>
       <p>Selected State is:{selectedState}</p>
+      <p>The capital is :{capital}</p>
     </div>
     </>
     
