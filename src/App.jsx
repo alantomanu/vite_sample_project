@@ -1,37 +1,18 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 function App() {
-  const data={
-    "kerala":"trivandrum",
-    "karnataka":"bengaluru",
-    "TN":"chenai"
+  const [fact , setFact]= useState("")
+  const numberRef =useRef()
+  const  getFact=async()=>{
+  const response= await fetch(`http://numbersapi.com/${numberRef.current.value}`)
+  const text =await response.text()
+  setFact(text)
   }
-const [ selectedState, setSelectedState]=useState("")
-const [capital,setCapital]=useState("")
-const changeState=(e)=>{
-console.log(e.target.value)
-setSelectedState(e.target.value);
-}
-
-useEffect(()=>{
-  setCapital(data[selectedState])
-},[selectedState])
-  return (
-    <>
-    <div>
-      <select onChange={changeState}>
-        <option value="kerala">Kerala</option>
-        <option value="karnataka">karnataka</option>
-        <option value="TN">TN</option>
-      </select>
-      <p>Selected State is:{selectedState}</p>
-      <p>The capital is :{capital}</p>
-    </div>
-    </>
-    
-
-    
-  )
+  return(<>
+  <input ref={numberRef} type='number' placeholder="Enter number"></input>
+  <button onClick={getFact}>Get Fact</button>
+  <p>{fact}</p>
+  </>)
 }
 
 export default App
