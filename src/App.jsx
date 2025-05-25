@@ -1,19 +1,30 @@
 import { useEffect, useRef, useState } from "react"
+import Post from "./components/post";
+
+
+
+
 
 function App() {
-  const [ datas, setData]=useState([])
-  const loadPosts =async ()=>{
+  const [ posts, setPosts]=useState([])
+  const [loading,setLoading]=useState(true)
+  useEffect(()=>{
+    const loadPosts =async ()=>{
     const res= await fetch ('https://jsonplaceholder.typicode.com/posts');
     const data = await res.json();
     console.log(data)
-    setData(data)
-  }
+    setPosts(data)
+    setLoading(false)};
+    loadPosts()
+  },[]);
+  if(loading) return <h1>Loading...</h1>
   return(
     <>
     <div>
-    <button onClick={loadPosts}>Load</button>
-    {datas.map((post)=>{return <h1>{post.title}</h1>})}
-    </div>
+    {posts.map((post)=>
+      <Post title={post.title} body={post.body} key={post.id}/>
+    )}
+    </div> 
     </>
   )
 }
