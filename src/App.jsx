@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from "react"
+import { createContext, useEffect, useRef, useState } from "react"
 import Post from "./components/post";
 import Counter from "./components/counter";
 import Card from "./components/Card";
 
 
-
+export const countContext=createContext();
 
 
 function App() {
+  
   const [count,setCount]=useState(0)
   const [ posts, setPosts]=useState([])
   const [loading,setLoading]=useState(true)
@@ -28,8 +29,14 @@ function App() {
       <Post title={post.title} body={post.body} key={post.id}/>
     )}
     </div>  */}
-    < Counter count={count} setCount={setCount}/>
-    <Card count={count}/>
+    <div>
+    <countContext.Provider value={{count,setCount}}>
+      
+    <Counter />
+
+    <Card/>
+    </countContext.Provider>
+    </div>
     </>
   )
 }
