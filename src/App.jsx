@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react"
 import Post from "./components/post";
+import Counter from "./components/counter";
+import Card from "./components/Card";
 
 
 
 
 
 function App() {
+  const [count,setCount]=useState(0)
   const [ posts, setPosts]=useState([])
   const [loading,setLoading]=useState(true)
   useEffect(()=>{
@@ -20,11 +23,13 @@ function App() {
   if(loading) return <h1>Loading...</h1>
   return(
     <>
-    <div>
+    {/* <div>
     {posts.map((post)=>
       <Post title={post.title} body={post.body} key={post.id}/>
     )}
-    </div> 
+    </div>  */}
+    < Counter count={count} setCount={setCount}/>
+    <Card count={count}/>
     </>
   )
 }
