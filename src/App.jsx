@@ -2,14 +2,15 @@ import { createContext, useEffect, useRef, useState } from "react"
 import Post from "./components/post";
 import Counter from "./components/counter";
 import Card from "./components/Card";
+import CountProvider from "./providers/CountProviders";
 
 
-export const countContext=createContext();
+
 
 
 function App() {
   
-  const [count,setCount]=useState(0)
+
   const [ posts, setPosts]=useState([])
   const [loading,setLoading]=useState(true)
   useEffect(()=>{
@@ -30,12 +31,10 @@ function App() {
     )}
     </div>  */}
     <div>
-    <countContext.Provider value={{count,setCount}}>
-      
-    <Counter />
-
+   <CountProvider>
+    <Counter/>
     <Card/>
-    </countContext.Provider>
+   </CountProvider>
     </div>
     </>
   )

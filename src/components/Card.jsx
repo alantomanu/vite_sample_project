@@ -1,8 +1,8 @@
-import { useContext } from "react"
-import { countContext } from "../App"
+
+import useCount from "../hooks/useCount"
 
 export default function Card(){
-    const {count,setCount} = useContext(countContext)
+    const {count,setCount} = useCount()
     return(
     <>
     <h1>Card</h1>
