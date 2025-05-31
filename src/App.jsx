@@ -3,14 +3,7 @@ import Post from "./components/post";
 import Counter from "./components/counter";
 import Card from "./components/Card";
 import CountProvider from "./providers/CountProviders";
-
-
-
-
-
 function App() {
-  
-
   const [ posts, setPosts]=useState([])
   const [loading,setLoading]=useState(true)
   useEffect(()=>{
