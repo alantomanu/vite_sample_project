@@ -7,7 +7,7 @@ function App() {
   const [ posts, setPosts]=useState([])
   const [loading,setLoading]=useState(true)
   useEffect(()=>{
-    const loadPosts =async ()=>{
+    const loadPosts=async ()=>{
     const res= await fetch ('https://jsonplaceholder.typicode.com/posts');
     const data = await res.json();
     console.log(data)
